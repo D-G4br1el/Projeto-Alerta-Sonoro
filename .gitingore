@@ -1,0 +1,15 @@
+# Arquivos do Python
+__pycache__/
+*.pyc
+
+# Ambiente virtual
+venv/
+.env/
+
+# Arquivos de SO
+.DS_Store
+Thumbs.db
+
+# Arquivos grandes ou privados
+assets/sons/*.wav
+assets/imagens/*.png
