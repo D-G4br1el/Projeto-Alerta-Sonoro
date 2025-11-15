@@ -1,3 +1,10 @@
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.8%2B-blue" alt="Python Version">
+  <img src="https://img.shields.io/badge/Status-Ativo-brightgreen" alt="Status">
+  <img src="https://img.shields.io/badge/Plataforma-Windows-lightgrey" alt="Platform">
+  <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
+</p>
+
 # 🔔 Sistema de Alerta Visual Automatizado
 
 ## 📌 Visão Geral  
