@@ -8,72 +8,72 @@
 # 🔔 Sistema de Alerta Visual Automatizado
 
 ## 📌 Visão Geral  
-Este projeto implementa um **sistema de monitoramento visual automatizado**, capaz de detectar elementos específicos na tela e disparar um **alerta sonoro** sempre que um padrão pré-definido for encontrado.
+Este projeto implementa um **sistema automatizado de monitoramento visual**, capaz de detectar imagens específicas exibidas na tela — como ícones, textos ou alertas gráficos.  
+Quando alguma das imagens cadastradas é encontrada, o sistema executa automaticamente:
 
-A solução é flexível e pode ser utilizada em diversos cenários, como:  
+- Uma **marcação visual** destacando o item identificado  
+- Um **alerta sonoro** para chamar atenção imediata  
+
+A ferramenta pode ser aplicada em diversos cenários, como:  
 - Monitoramento de painéis operacionais  
-- Detecção de mudanças críticas em dashboards  
-- Avisos automáticos em sistemas sem notificações nativas  
-- Observação de eventos relevantes exibidos apenas visualmente  
+- Detecção de eventos críticos em dashboards  
+- Alertas automáticos em sistemas sem notificações nativas  
+- Observação de informações relevantes exibidas apenas visualmente  
 
 ---
 
 ## 🎯 Motivação  
-Este projeto foi desenvolvido para resolver uma demanda real de operação, onde era importante:  
-- Detectar rapidamente eventos prioritários exibidos somente na interface.  
-- Garantir que informações importantes não passassem despercebidas.  
-- Automatizar tarefas que antes exigiam um maior nível de atenção.  
+Este projeto nasceu de uma demanda real:  
+Garantir que eventos visuais importantes não passem despercebidos durante o atendimento, especialmente quando o sistema monitorado não possui alertas nativos.
 
-A solução demonstra como **Python + automação de interface** podem oferecer resultados práticos sem necessidade de integração direta com o sistema ou interface em questão.
+O objetivo foi criar uma solução simples, eficiente e totalmente independente da aplicação monitorada — usando apenas recursos visuais.
 
 ---
 
 ## ✅ Funcionalidades Principais  
-- 🔍 **Monitoramento contínuo da tela** em busca das imagens de referência (.png).  
-- 🔊 **Alerta sonoro (.wav)** automático ao detectar os padrões cadastrados.  
-- 🧵 **Execução em thread (daemon)**, rodando em background.  
-- ⚙️ **Configuração simples de parâmetros**, como:  
+- 🔍 **Monitoramento contínuo da tela** em busca das imagens cadastradas  
+- 🔊 **Alerta sonoro** automático quando uma correspondência é encontrada  
+- 🖼️ **Marcação visual temporária** sobre o item detectado  
+- 🧵 **Thread dedicada (daemon)** para execução em background  
+- ⚙️ **Parâmetros configuráveis**, como:
   - Tempo de monitoramento  
   - Intervalo entre ciclos  
-  - Pausa após alerta  
-  - Nível de confiança (`confidence`) da detecção  
-
-- 📁 **Compatível com qualquer sistema exibido visualmente**, sem depender de APIs ou integrações.
+  - Tempo de pausa após detecção  
+  - Confiança da detecção (via OpenCV)  
+- 📁 **Compatível com qualquer sistema exibido visualmente**, sem necessidade de APIs ou integrações  
 
 ---
 
-## 🧩 Como Funciona 
-1. O script usa `pyautogui.locateOnScreen()` para procurar imagens que representem o que deve ser detectado na tela.  
-2. Ao localizar uma correspondência, um alerta sonoro é reproduzido usando `winsound.PlaySound()` (Windows).  
-3. Uma **thread dedicada** realiza todo o processo de monitoramento de forma contínua.  
-4. O script principal aguarda o usuário pressionar **CTRL + C** para encerrar a execução de forma controlada.  
-5. O parâmetro `confidence` depende da biblioteca `opencv-python` para realizar matching com precisão.  
+## 🧩 Como Funciona  
 
-> **Observações:** 
-1. Por se tratar de automação visual, a detecção funciona independentemente do tipo de sistema sendo monitorado.
-2. Em sistemas operacionais não-Windows, a reprodução sonora pode ser adaptada para outras bibliotecas como `playsound` ou `simpleaudio`.
+1. Adicione as imagens a serem monitoradas na pasta **`assets/icones/`**  
+2. Insira os caminhos dessas imagens na lista `icone_paths`  
+3. O script usa `pyautogui.locateOnScreen()` para identificar visualmente a presença desses itens  
+4. Caso um ícone seja encontrado:
+   - Um alerta sonoro é acionado  
+   - Um retângulo vermelho é exibido ao redor do item detectado  
+5. Todo o monitoramento roda em uma thread separada  
+6. A execução é encerrada pelo usuário via **CTRL + C**  
+7. O parâmetro `confidence` depende do pacote `opencv-python`  
+
+> **Observações importantes:**  
+> • Por se tratar de automação visual, a detecção funciona independentemente do tipo de sistema sendo monitorado.  
+> • Pode ser adaptado para qualquer resolução ou ambiente.  
+> • A marcação é um overlay simples.  
+> • Em sistemas operacionais não-Windows, a reprodução sonora pode ser adaptada para outras bibliotecas como `playsound` ou `simpleaudio`.  
+> • Para usar o parâmetro `confidence`, o pacote `opencv-python` é necessário.  
+
 
 ---
 
 ## 🛠️ Pré-requisitos  
-- **Sistema Operacional recomendado:** Windows (Para o winsound.PlaySound())
-- **Python:** versão 3.8 ou superior  
+- **Windows** (recomendado pela biblioteca `winsound`)  
+- **Python 3.8+**
 
 ---
 
 ## 📦 Dependências  
-Listadas no arquivo `requirements.txt`:
-
-- `pyautogui`  
-- `opencv-python`  
-- `pillow`  
-
-> Bibliotecas já incluídas no Python/Windows:  
-- `time`  
-- `threading`  
-- `winsound`  
-
-Instalação:
+Instale tudo com:
 
 ```bash
 pip install -r requirements.txt
